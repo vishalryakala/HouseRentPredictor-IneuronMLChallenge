@@ -19,7 +19,9 @@ def predict():
     region = request.form['region']
     print('Region :- ',request.form['region'])
     lat = request.form['lat']
+    lat=int(float(lat))
     long = request.form['long']
+    long=int(float(long))
     type = request.form['type']
     sqfeet = request.form['sqfeet']
     beds = request.form['beds']
