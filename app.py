@@ -4,7 +4,7 @@ import joblib
 
 app = Flask(__name__)
 
-model = joblib.load('/content/drive/My Drive/Projects/HouseRent_Joblib_XGB.joblib' + '.gz')
+model = joblib.load('HouseRent_Joblib_XGB.joblib' + '.gz')
 
 @app.route('/')
 def home():
