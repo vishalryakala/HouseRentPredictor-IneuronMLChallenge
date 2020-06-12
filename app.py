@@ -45,7 +45,7 @@ def predict():
     final_features = [np.array(int_features)]
     prediction = model.predict(final_features)
 
-    return render_template('index.html', prediction_text='House Rent would be : {:.2f}'.format(prediction[0]))
+    return render_template('index.html', prediction_text='House Rent would be : ${:.2f}'.format(prediction[0]))
 
 if __name__ == "__main__":
     app.run(debug=True)
