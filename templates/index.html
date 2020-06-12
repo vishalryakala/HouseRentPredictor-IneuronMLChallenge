@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+  <title>HOUSE RENT ML API</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='Red_home.ico') }}">
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
+<style>
+
+.container{
+	
+	background-image: radial-gradient(#1b9ce5 5%, #0074e1 15%, #19181a 60%);
+	background-size: 500% 500%;
+	animation: change-gradient 15s ease-in-out infinite;
+}
+@keyframes change-gradient {
+	0%{
+		background-position: 0 50%;
+	}
+	50%{
+		background-position: 100% 50%;
+	}
+	100%{
+		background-position: 0 50%;
+	}
+}
+
+.container-heading{
+    margin: 0;
+}
+
+.heading_font{
+    color: #ffffff;
+	font-family: 'Pacifico', cursive;
+	font-size: 35px;
+	font-weight: normal;
+}
+
+
+
+.description p{
+	color: #ffffff;
+    font-style: italic;
+    font-size: 14px;
+    margin: -5px 0 0;
+}
+
+form {text-align: center;}
+button {text-align: center;}
+div {
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  }
+
+body {
+  background-color: #eae7dc;
+}
+
+.button {
+  background-color: #86c232;
+  font-style: italic;  
+  border: none;
+  color: #222629;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.input{
+  float:center;
+  width:250px;
+  height:25px;
+  margin-bottom:3px; /*or whatever you want the spacing to be*/
+  border-radius: 4px;
+}
+
+.select{
+  float:center;
+  width:256px;
+  height:30px;
+  margin-bottom:3px; /*or whatever you want the spacing to be*/
+  border-radius: 4px;
+}
+
+.footer{
+	flex-shrink: 0;
+	position: relative;
+	padding: 20px;
+	font-style: italic;
+	color: #ffffff;
+}
+
+/* Contact */
+.contact-icon{
+	color: #ffffff;
+	padding: 7px;
+}
+
+.contact-icon:hover{
+	color: #8c8c8c;
+}
+
+
+.footer-description{
+	color: #ffffff;
+	margin: 0;
+	font-size: 16px;
+	font-style: italic;
+	color: #ffffff;
+}
+
+
+.default_color {
+  color: #ccc;
+  font-size: 14px;
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+</style>
+
+<script>
+	function populate()
+	{
+		var st=document.getElementById('state').value;
+		
+		if (st==1)
+		{
+			var array=['1 - birmingham','2 - huntsville / decatur','3 - dothan','4 - mobile','5 - montgomery','6 - florence / muscle shoals','7 - gadsden-anniston','8 - tuscaloosa'];
+		}
+		else if (st==2)
+		{
+			var array=['9 - anchorage / mat-su','10 - fairbanks','25 - kenai peninsula','26 - southeast alaska'];
+		}
+		else if (st==3)
+		{
+			var array=['11 - phoenix','12 - flagstaff / sedona','13 - tucson','15 - prescott','16 - yuma','27 - mohave county','30 - show low','32 - sierra vista'];
+		}
+		else if (st==4)
+		{
+			var array=['14 - little rock','17 - fayetteville','19 - texarkana','28 - fort smith','29 - jonesboro'];
+		}
+		else if (st==5)
+		{
+			var array=['18 - bakersfield','20 - fresno / madera','21 - hanford-corcoran','22 - humboldt county','23 - inland empire','24 - los angeles','31 - gold country','33 - chico','34 - imperial county','36 - modesto','37 - orange county','38 - mendocino county','39 - merced','40 - palm springs','41 - reno / tahoe','42 - monterey bay','43 - redding','44 - sacramento','45 - san diego','46 - san luis obispo','47 - santa barbara','48 - SF bay area','49 - stockton','50 - ventura county','51 - susanville','53 - yuba-sutter','54 - visalia-tulare','55 - siskiyou county','56 - santa maria'];
+		}
+		else if (st==6)
+		{
+			var array=['35 - boulder','52 - colorado springs','57 - denver','59 - fort collins / north CO','60 - western slope','65 - high rockies','66 - pueblo','72 - eastern CO'];
+		}
+		else if (st==7)
+		{
+			var array=['58 - northwest CT','61 - eastern CT','62 - hartford','63 - new haven'];
+		}
+		else if (st==8)
+		{
+			var array=['64 - washington, DC'];
+		}
+		else if (st==9)
+		{
+			var array=['67 - daytona beach','68 - ft myers / SW florida','69 - gainesville','70 - jacksonville','71 - ocala','73 - heartland florida','75 - lakeland','76 - florida keys','77 - north central FL','78 - orlando','79 - panama city','80 - pensacola','81 - sarasota-bradenton','82 - south florida','83 - okaloosa / walton','84 - space coast','85 - tallahassee','86 - tampa bay area','91 - treasure coast','93 - st augustine'];
+		}
+		else if (st==10)
+		{
+			var array=['74 - delaware'];
+		}
+		else if (st==11)
+		{
+			var array=['87 - atlanta','88 - augusta','89 - brunswick','90 - athens','92 - albany','94 - macon / warner robins','95 - columbus','96 - northwest GA','97 - savannah / hinesville','101 - statesboro','103 - valdosta'];
+		}
+		else if (st==12)
+		{
+			var array=['98 - hawaii'];
+		}
+		else if (st==13)
+		{
+			var array=['99 - boise','100 - east idaho',"102 - spokane / coeur d'alene",'107 - twin falls','116 - lewiston / clarkston','117 - pullman / moscow'];
+		}
+		else if (st==14)
+		{
+			var array=['104 - bloomington-normal','105 - champaign urbana','106 - chicago','108 - decatur','109 - la salle co','110 - quad cities, IA/IL','111 - st louis, MO','112 - peoria','114 - springfield','120 - rockford','124 - southern illinois','125 - mattoon-charleston','127 - western IL'];
+		}
+		else if (st==15)
+		{
+			var array=['113 - evansville','115 - bloomington','118 - indianapolis','119 - fort wayne','121 - south bend / michiana','123 - richmond','126 - muncie / anderson','128 - lafayette / west lafayette','129 - kokomo','130 - terre haute']['113 - evansville','115 - bloomington','118 - indianapolis','119 - fort wayne','121 - south bend / michiana','123 - richmond','126 - muncie / anderson','128 - lafayette / west lafayette','129 - kokomo','130 - terre haute'];
+		}
+		else if (st==16)
+		{
+			var array=['122 - ames','131 - cedar rapids','132 - des moines','133 - omaha / council bluffs','135 - fort dodge','138 - sioux city','142 - iowa city','144 - dubuque','146 - waterloo / cedar falls','152 - mason city','155 - southeast IA'];
+		}
+		else if (st==17)
+		{
+			var array=['134 - wichita','136 - lawrence','137 - salina','147 - manhattan','149 - topeka','154 - kansas city, MO','157 - southeast KS','159 - northwest KS','160 - southwest KS'];
+		}
+		else if (st==18)
+		{
+			var array=['139 - bowling green','140 - lexington','141 - eastern kentucky','143 - louisville','148 - western KY','158 - huntington-ashland','164 - owensboro'];
+		}
+		else if (st==19)
+		{
+			var array=['145 - baton rouge','150 - lafayette','151 - monroe','153 - new orleans','156 - lake charles','161 - shreveport','162 - central louisiana','163 - houma'];
+		}
+		else if (st==20)
+		{
+			var array=['165 - maine'];
+		}
+		else if (st==21)
+		{
+			var array=['166 - lansing','176 - ann arbor','177 - battle creek','178 - detroit metro','179 - holland','181 - flint','182 - kalamazoo','151 - monroe','183 - muskegon','184 - saginaw-midland-baycity','185 - upper peninsula','188 - grand rapids','190 - central michigan','191 - northern michigan','192 - jackson','193 - southwest michigan','194 - the thumb','195 - port huron','121 - south bend / michiana'];
+		}
+		else if (st==22)
+		{
+			var array=['167 - annapolis','168 - baltimore','169 - frederick','170 - southern maryland','175 - western maryland','180 - cumberland valley','186 - eastern shore'];
+		}
+		else if (st==23)
+		{
+			var array=['171 - boston','172 - south coast','173 - western massachusetts','174 - worcester / central MA','187 - cape cod / islands'];
+		}
+		else if (st==24)
+		{
+			var array=['189 - bemidji','196 - brainerd','197 - duluth / superior','198 - fargo / moorhead','199 - minneapolis / st paul','200 - rochester','202 - st cloud','208 - mankato','211 - southwest MN'];
+		}
+		else if (st==25)
+		{
+			var array=['201 - gulfport / biloxi','203 - hattiesburg','192 - jackson','205 - north mississippi','209 - southwest MS','222 - meridian'];
+		}
+		else if (st==26)
+		{
+			var array=['204 - asheville','213 - charlotte','214 - boone','17 - fayetteville','217 - eastern NC','218 - greensboro','70 - jacksonville','219 - raleigh / durham / CH','220 - hickory / lenoir','232 - outer banks','233 - wilmington','234 - winston-salem'];
+
+		}
+		else if (st==27)
+		{
+			var array=['206 - joplin','207 - kirksville','114 - springfield','210 - columbia / jeff city','212 - st joseph','221 - lake of the ozarks','223 - southeast missouri','224 - kansas city','225 - st louis'];
+		}
+		else if (st==28)
+		{
+			var array=['215 - billings','216 - missoula','226 - bozeman','227 - eastern montana','228 - kalispell','229 - great falls','230 - helena','231 - butte'];
+		}
+		else if (st==29)
+		{
+			var array=['235 - lincoln','133 - omaha / council bluffs','237 - north platte','252 - grand island','254 - scottsbluff / panhandle'];
+		}
+		else if (st==30)
+		{
+			var array=['236 - las vegas','41 - reno / tahoe','259 - elko'];
+		}
+		else if (st==31)
+		{
+			var array=['238 - central NJ','239 - north jersey','240 - jersey shore','241 - south jersey'];
+		}
+		else if (st==32)
+		{
+			var array=['242 - albuquerque','245 - farmington','253 - santa fe / taos','260 - clovis / portales','264 - las cruces','265 - roswell / carlsbad'];
+		}
+		else if (st==33)
+		{
+			var array=['243 - buffalo','244 - ithaca','246 - long island','247 - hudson valley','248 - syracuse','249 - plattsburgh-adirondacks','250 - catskills','251 - watertown','92 - albany','255 - new york city','256 - binghamton','257 - utica-rome-oneida','200 - rochester','261 - finger lakes','262 - chautauqua','263 - elmira-corning','266 - glens falls','267 - potsdam-canton-massena','268 - oneonta','269 - twin tiers NY/PA'];
+		}
+		else if (st==34)
+		{
+			var array=['258 - new hampshire'];
+		}
+		else if (st==35)
+		{
+			var array=['270 - cincinnati','272 - akron / canton','95 - columbus','275 - dayton / springfield','276 - cleveland','277 - lima / findlay','278 - toledo','279 - northern panhandle','281 - zanesville / cambridge','282 - ashtabula','284 - chillicothe','289 - tuscarawas co','295 - mansfield','90 - athens','297 - parkersburg-marietta'];
+		}
+		else if (st==36)
+		{
+			var array=['271 - north dakota','273 - bismarck','274 - grand forks'];
+		}
+		else if (st==37)
+		{
+			var array=['280 - oklahoma city','283 - lawton','285 - texoma','286 - tulsa','296 - stillwater','298 - northwest OK'];
+		}
+		else if (st==38)
+		{
+			var array=['287 - bend','288 - corvallis/albany','290 - east oregon','291 - eugene','292 - medford-ashland','293 - oregon coast','294 - portland'];
+		}
+		else if (st==39)
+		{
+			var array=[];
+		}
+		else
+		{
+			var array=[];
+		}
+		
+		var string='<option disabled="" selected="">Region</option>';
+             
+                for(i=0;i<array.length;i++)
+                {
+                    string=string+"<option value="+array[i]+">"+array[i]+"</option>";
+                }
+                document.getElementById("region").innerHTML=string;
+		
+	}
+</script>
+
+</head>
+
+<body class="container">
+
+<div>
+            <br><h2 class='container-heading'><span class="heading_font">House Rent Prediction</span></h2>
+            <div class='description'>
+    			<p>A Machine Learning Web App, Built with Flask.</p>
+    		</div>
+    	</div><br><br>
+		
+ <div class="login">
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+		
+		<select class="select" id="state" name="state" required="required" onchange="populate()">
+			<option disabled="" selected="">State</option>
+			<option value="1">al</option>
+			<option value="2">ak</option>
+			<option value="3">az</option>
+			<option value="4">ar</option>
+			<option value="5">ca</option>
+			<option value="6">co</option>
+			<option value="7">ct</option>
+			<option value="8">dc</option>
+			<option value="9">fl</option>
+			<option value="10">de</option>
+			<option value="11">ga</option>
+			<option value="12">hi</option>
+			<option value="13">id</option>
+			<option value="14">il</option>
+			<option value="15">in</option>
+			<option value="16">ia</option>
+			<option value="17">ks</option>
+			<option value="18">ky</option>
+			<option value="19">la</option>
+			<option value="20">me</option>
+			<option value="21">mi</option>
+			<option value="22">md</option>
+			<option value="23">ma</option>
+			<option value="24">mn</option>
+			<option value="25">ms</option>
+			<option value="26">nc</option>
+			<option value="27">mo</option>
+			<option value="28">mt</option>
+			<option value="29">ne</option>
+			<option value="30">nv</option>
+			<option value="31">nj</option>
+			<option value="32">nm</option>
+			<option value="33">ny</option>
+			<option value="34">nh</option>
+			<option value="35">oh</option>
+			<option value="36">nd</option>
+			<option value="37">ok</option>
+			<option value="38">or</option>
+			<option value="39">nan</option>
+		</select>
+		<select id='region' class="select" name="region" required="required">
+			<option disabled="" selected="">Region</option>
+		</select><br>
+		<input class="input" type="number" step="0.01" name="lat" placeholder="latitude (eg:70.5)" required="required" min="-90" max="+90"/>
+		<input class="input" type="number" step="0.01" name="long" placeholder="longitude (eg:120.8)" required="required" min="-180" max="+180"/><br>
+		<select class="select" name="type" required="required">
+			<option disabled="" selected="">Type</option>
+			<option value="1">Apartment</option>
+			<option value="2">House</option>
+			<option value="3">Manufactured</option>
+			<option value="4">Townhouse</option>
+			<option value="5">Condo</option>
+			<option value="6">Duplex</option>
+			<option value="7">In-law</option>
+			<option value="8">Cottage/Cabin</option>
+			<option value="9">Flat</option>
+			<option value="10">Loft</option>
+			<option value="11">Land</option>
+			<option value="12">assisted living</option>
+		</select>
+        <input class="input" type="number" name="sqfeet" placeholder="Sq Feet (eg:1200)" required="required" min="100" max="3000"/><br>
+        <select class="select" name="beds" required="required">
+			<option disabled="" selected="">No.of Beds</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+		</select>
+		<select class="select" name="baths" required="required">
+			<option disabled="" selected="">No.of Baths</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+		</select><br>
+		<select class="select" name="cats_allowed" required="required">
+			<option disabled="" selected="">Cats allowed</option>
+			<option value="1">Yes</option>
+			<option value="0">No</option>
+		</select>
+		<select class="select" name="dogs_allowed" required="required">
+			<option disabled="" selected="">Dogs allowed</option>
+			<<option value="1">Yes</option>
+			<option value="0">No</option>
+		</select><br>
+		<select class="select" name="smoking_allowed" required="required">
+			<option disabled="" selected="">Smoking allowed</option>
+			<<option value="1">Yes</option>
+			<option value="0">No</option>
+		</select>
+		<select class="select" name="wheelchair_access" required="required">
+			<option disabled="" selected="">Wheel Chair Access</option>
+			<<option value="1">Yes</option>
+			<option value="0">No</option>
+		</select><br>
+		<select class="select" name="electric_vehicle_charge" required="required">
+			<option disabled="" selected="">Electric Vehicle Charge</option>
+			<<option value="1">Yes</option>
+			<option value="0">No</option>
+		</select>
+		<select class="select" name="comes_furnished" required="required">
+			<option disabled="" selected="">Comes Furnished</option>
+			<<option value="1">Yes</option>
+			<option value="0">No</option>
+		</select><br>
+		<select class="select" name="laundry_options" required="required">
+			<option disabled="" selected="">Laundry options</option>
+			<<option value="1">laundry on site</option>
+			<option value="2">w/d hookups</option>
+			<option value="3">w/d in unit</option>
+			<option value="4">nan</option>
+			<option value="5">laundry in bldg</option>
+			<option value="6">no laundry on site</option>
+		</select>
+		<select class="select" name="parking_options" required="required">
+			<option disabled="" selected="">Parking options</option>
+			<<option value="1">street parking</option>
+			<option value="2">off-street parking</option>
+			<option value="3">nan</option>
+			<option value="4">carport</option>
+			<option value="5">attached garage</option>
+			<option value="6">detached garage</option>
+			<option value="7">no parking</option>
+			<option value="8">valet parking</option>
+		</select><br>
+		<br>
+        <button type="submit" class="button">Predict</button><br>
+    </form>
+
+   <br>
+	<p class='footer-description'>{{ prediction_text }}</p>
+
+ </div><br>
+ <div class='footer'>
+    <div class="contact">
+        <a target="_blank" href="https://github.com/vishalryakala/HouseRentPredictor-IneuronMLChallenge"><i class="fab fa-github fa-lg contact-icon"></i></i></a>
+        <a target="_blank" href="https://www.linkedin.com/in/vishal-ryakala/"><i class="fab fa-linkedin fa-lg contact-icon"></i></i></i></a>
+    </div>
+    <p class='footer-description'>By Vishal Ryakala.</p>
+</div>
+</body>
+
+</html>
